@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guten Tag Widget</title>
+<style>
+  body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; padding:12px; background:transparent; color:inherit;}
+  .greet{font-size:18px; font-weight:600;}
+  .time{font-size:32px; margin-top:6px; font-variant-numeric: tabular-nums;}
+</style>
+</head>
+<body>
+  <div id="widget">
+    <div id="greet" class="greet">Hallo</div>
+    <div id="time" class="time">00:00</div>
+  </div>
+<script>
+function updateGreetingAndTime(){
+  const now = new Date();
+  const hrs = now.getHours();
+  const mins = now.getMinutes();
+  const hh = String(hrs).padStart(2,'0');
+  const mm = String(mins).padStart(2,'0');
+  const timeStr = hh + ':' + mm;
+  // Greeting in German
+  let greet = 'Guten Tag';
+  if(hrs < 12) greet = 'Guten Morgen ☀️';
+  else if(hrs < 18) greet = 'Guten Nachmittag 🌤️';
+  else greet = 'Guten Abend 🌙';
+  document.getElementById('greet').textContent = greet;
+  document.getElementById('time').textContent = timeStr;
+}
+// initial + update every 10s to stay current
+updateGreetingAndTime();
+setInterval(updateGreetingAndTime, 10000);
+</script>
+</body>
+</html>
